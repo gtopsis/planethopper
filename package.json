@@ -1,8 +1,12 @@
 {
-  "name": "plannet",
-  "version": "0.0.0",
+  "name": "planethopper",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
+  "author": {
+    "name": "George Lucas",
+    "license": "MIT"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
