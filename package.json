@@ -2,11 +2,11 @@
   "name": "planethopper",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
   "author": {
     "name": "George Lucas",
     "license": "MIT"
   },
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -25,7 +25,9 @@
     ]
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
     "pinia": "^3.0.1",
+    "tailwindcss": "^4.1.4",
     "vue": "^3.5.13"
   },
   "devDependencies": {
