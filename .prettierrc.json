@@ -15,6 +15,7 @@
   "useTabs": false,
   "plugins": [
     "prettier-plugin-packagejson",
-    "prettier-plugin-organize-imports"
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
   ]
 }
