@@ -3,6 +3,10 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
+  --font-*: initial;
+  --font-primary: 'Roboto', 'sans-serif';
+  --font-secondary: Inter, 'serif';
+
   --color-primary: #07dfd4;
   --color-secondary: #14a49c;
   --color-accent: #f05158;
