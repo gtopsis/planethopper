@@ -17,7 +17,7 @@ const dynamicClasses = computed(() =>
     ? ['border-accent', 'shadow-lg', 'hover:cursor-auto']
     : ['border-surface', 'shadow-md', 'hover:cursor-pointer'],
 )
-const tooltipText = computed(() => (isSelected ? '' : 'Add destination to trip plan'))
+const tooltipText = computed(() => (isSelected ? '' : 'Add destination to travel plan'))
 
 const convertNumericValueToUSFormat = (numericValue: number): string =>
   Intl.NumberFormat('es-US').format(numericValue)
@@ -37,20 +37,35 @@ const onClick = (event: Event) => {
     class="bg-surface flex w-full rounded-lg border-1 p-4 transition-shadow hover:shadow-lg"
     :class="dynamicClasses"
     :title="tooltipText"
+    :data-testid="`planet-item-${planetDestination.id}`"
     @click="onClick($event)"
   >
     <div class="h-20 w-20 flex-shrink-0">
       <img
         :src="planetDestination.imageUrl"
-        :alt="planetDestination.name"
+        :alt="`Image of planet ${planetDestination.name}`"
         class="h-full w-full rounded-lg object-cover"
+        :data-testid="`planet-item-${planetDestination.id}-image`"
       />
     </div>
 
     <div class="ml-4 flex flex-grow flex-col text-left">
-      <h2 class="text-text-primary flex-grow text-xl font-bold">{{ planetDestination.name }}</h2>
-      <span class="text-text-secondary text-sm">{{ planetDestination.terrain }}</span>
-      <span class="text-text-secondary mt-1 text-sm">{{ formattedPopulation }}</span>
+      <h2
+        class="text-text-primary flex-grow text-xl font-bold"
+        :data-testid="`planet-item-${planetDestination.id}-name`"
+      >
+        {{ planetDestination.name }}
+      </h2>
+      <span
+        class="text-text-secondary text-sm"
+        :data-testid="`planet-item-${planetDestination.id}-terrain`"
+        >{{ planetDestination.terrain }}</span
+      >
+      <span
+        class="text-text-secondary mt-1 text-sm"
+        :data-testid="`planet-item-${planetDestination.id}-population`"
+        >{{ formattedPopulation }}</span
+      >
     </div>
   </button>
 </template>
