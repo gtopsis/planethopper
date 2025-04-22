@@ -1,0 +1,38 @@
+<script setup lang="ts">
+import type { PlanetDestinationExtended } from '@/types'
+import PlanetDestinationListItem from './PlanetDestinationListItem.vue'
+
+interface Props {
+  planetDestinationsWithState: PlanetDestinationExtended[]
+}
+const { planetDestinationsWithState = [] } = defineProps<Props>()
+
+const emit = defineEmits<{
+  (e: 'selectPlanetDestination', planeDestinationName: PlanetDestinationExtended['id']): void
+}>()
+
+const onSelectPlanetDestination = (planeDestinationId: PlanetDestinationExtended['id']) => {
+  emit('selectPlanetDestination', planeDestinationId)
+}
+</script>
+
+<template>
+  <ul v-if="planetDestinationsWithState.length > 0">
+    <li
+      v-for="{ isSelected, ...planetDestination } in planetDestinationsWithState"
+      :key="planetDestination.id"
+    >
+      <PlanetDestinationListItem
+        :planetDestination="planetDestination"
+        :isSelected="isSelected"
+        @select="onSelectPlanetDestination(planetDestination.id)"
+      />
+    </li>
+  </ul>
+
+  <p v-else class="text-text-secondary text-sm">
+    The expansion of the universe did not leave a planet to visit
+  </p>
+</template>
+
+<style lang="css" scoped></style>
