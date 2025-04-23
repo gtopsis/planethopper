@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconInfo from '@/components/icons/IconInfo.vue'
 import type { PlanetDestinationExtended } from '@/types'
 import PlanetDestinationListItem from './PlanetDestinationListItem.vue'
 
@@ -31,8 +32,13 @@ const onSelectPlanetDestination = (planeDestinationId: PlanetDestinationExtended
     </li>
   </ul>
 
-  <p v-else class="text-text-secondary text-sm" data-testid="planet-destination-list-empty">
-    The expansion of the universe did not leave a planet to visit
+  <p
+    v-else
+    class="text-text-secondary flex items-center justify-center space-x-2 rounded-lg p-4 text-sm"
+    data-testid="planet-destination-list-empty"
+  >
+    <IconInfo class="h-5 w-5" />
+    <span>The expansion of the universe did not leave a planet to visit</span>
   </p>
 </template>
 
