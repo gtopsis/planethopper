@@ -1,27 +1,15 @@
-import type { PlanetDestinationExtended } from '@/types'
+import { createPlanetDestinationExtended } from '@/utils/test'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import PlanetDestinationListItem, {
   type Props as PlanetDestinationListItemProps,
 } from '../PlanetDestinationListItem.vue'
 
-const createPlanetDestination = (
-  overrides: Partial<PlanetDestinationListItemProps['planetDestination']> = {},
-): Omit<PlanetDestinationExtended, 'isSelected'> => ({
-  id: 1,
-  name: 'Tatooine',
-  imageUrl: '/tatooine.jpg',
-  terrain: 'Desert',
-  population: 200000,
-  url: 'https://host:port/planets/id',
-  ...overrides,
-})
-
 const createPlanetDestinationListItemProps = (
   overrides: Partial<PlanetDestinationListItemProps> = {},
 ): PlanetDestinationListItemProps => {
   return {
-    planetDestination: createPlanetDestination(overrides.planetDestination),
+    planetDestination: createPlanetDestinationExtended(overrides.planetDestination),
     isSelected: false,
     ...overrides,
   }
@@ -112,7 +100,7 @@ describe('PlanetDestinationListItem', () => {
   it('formats population number correctly', () => {
     const wrapper = mount(PlanetDestinationListItem, {
       props: createPlanetDestinationListItemProps({
-        planetDestination: createPlanetDestination({ population: 1000000 }),
+        planetDestination: createPlanetDestinationExtended({ population: 1000000 }),
       }),
     })
 
