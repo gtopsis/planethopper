@@ -1,16 +1,13 @@
 import type { PlanetDestinationExtended } from '@/types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import PlanetDestinationListItem from '../PlanetDestinationListItem.vue'
-
-type PlanetDestinationListItemProps = {
-  planetDestination: Omit<PlanetDestinationExtended, 'isSelected'>
-  isSelected: boolean
-}
+import PlanetDestinationListItem, {
+  type Props as PlanetDestinationListItemProps,
+} from '../PlanetDestinationListItem.vue'
 
 const createPlanetDestination = (
   overrides: Partial<PlanetDestinationListItemProps['planetDestination']> = {},
-) => ({
+): Omit<PlanetDestinationExtended, 'isSelected'> => ({
   id: 1,
   name: 'Tatooine',
   imageUrl: '/tatooine.jpg',
@@ -31,7 +28,7 @@ const createPlanetDestinationListItemProps = (
 }
 
 const generateElementTestSelector = (id: number, attribute?: string): string => {
-  const testIdPrefix = `planet-item-${id}`
+  const testIdPrefix = `planet-destination-${id}`
   if (!attribute) {
     return `[data-testid="${testIdPrefix}"]`
   }
