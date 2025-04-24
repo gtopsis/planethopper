@@ -22,6 +22,7 @@ const onSelectPlanetDestination = (planeDestinationId: PlanetDestinationExtended
     <li
       v-for="{ isSelected, ...planetDestination } in planetDestinationsWithState"
       :key="planetDestination.id"
+      class="mb-2 last:mb-0"
     >
       <PlanetDestinationListItem
         :planetDestination="planetDestination"
