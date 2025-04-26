@@ -2,7 +2,7 @@ export interface PlanetDestinationData {
   name: string
   imageUrl: string
   terrain: string
-  population: number
+  population: string
   url: string
 }
 
