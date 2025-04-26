@@ -1,12 +1,19 @@
+export interface PlanetDestinationAPIResponse {
+  count: number
+  next: string | null
+  previous: string | null
+  results: PlanetDestinationExtended[] | null
+}
+
 export interface PlanetDestinationData {
   name: string
-  imageUrl: string
   terrain: string
   population: number
   url: string
 }
 
 export interface PlanetDestinationExtended extends Exclude<PlanetDestinationData, 'url'> {
-  id: number
+  id: string
+  imageUrl: string
   isSelected: boolean
 }
