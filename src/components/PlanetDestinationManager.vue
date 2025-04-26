@@ -64,8 +64,8 @@ const fetchMorePlanetDestinations = () => {
     <PlanetDestinationList
       v-if="allPlanetDestinations !== null"
       class="w-full"
-      :planetDestinationsWithState="allPlanetDestinations"
-      @selectPlanetDestination="onSelectPlanetDestination"
+      :planet-destinations-with-state="allPlanetDestinations"
+      @select-planet-destination="onSelectPlanetDestination"
     />
 
     <ErrorAlert v-if="error" :error="error" />

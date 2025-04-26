@@ -25,8 +25,8 @@ const onSelectPlanetDestination = (planeDestinationId: PlanetDestinationExtended
       class="mb-2 last:mb-0"
     >
       <PlanetDestinationListItem
-        :planetDestination="planetDestination"
-        :isSelected="isSelected"
+        :planet-destination="planetDestination"
+        :is-selected="isSelected"
         :data-testid="`planet-destination-item-${planetDestination.id}`"
         @select="onSelectPlanetDestination(planetDestination.id)"
       />
