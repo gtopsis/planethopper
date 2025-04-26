@@ -28,9 +28,9 @@ describe('PlanetDestinationList', () => {
 
   it('renders correct number of planet destination items', () => {
     const planets = [
-      createPlanetDestinationExtended({ id: 1 }),
-      createPlanetDestinationExtended({ id: 2 }),
-      createPlanetDestinationExtended({ id: 3 }),
+      createPlanetDestinationExtended({ id: '1' }),
+      createPlanetDestinationExtended({ id: '2' }),
+      createPlanetDestinationExtended({ id: '3' }),
     ]
     const wrapper = shallowMount(PlanetDestinationList, {
       props: createPlanetDestinationListProps({
@@ -82,9 +82,9 @@ describe('PlanetDestinationList', () => {
 
   it('handles multiple planets with different selected states', () => {
     const planets = [
-      createPlanetDestinationExtended({ id: 1, isSelected: true }),
-      createPlanetDestinationExtended({ id: 2, isSelected: false }),
-      createPlanetDestinationExtended({ id: 3, isSelected: true }),
+      createPlanetDestinationExtended({ id: '1', isSelected: true }),
+      createPlanetDestinationExtended({ id: '2', isSelected: false }),
+      createPlanetDestinationExtended({ id: '3', isSelected: true }),
     ]
     const wrapper = shallowMount(PlanetDestinationList, {
       props: createPlanetDestinationListProps({
