@@ -100,7 +100,7 @@ describe('PlanetDestinationListItem', () => {
   it('formats population number correctly', () => {
     const wrapper = mount(PlanetDestinationListItem, {
       props: createPlanetDestinationListItemProps({
-        planetDestination: createPlanetDestinationExtended({ population: 1000000 }),
+        planetDestination: createPlanetDestinationExtended({ population: '1000000' }),
       }),
     })
 

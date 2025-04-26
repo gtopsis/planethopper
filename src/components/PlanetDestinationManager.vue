@@ -6,7 +6,7 @@ import IconDownload from '@/components/icons/IconDownload.vue'
 import PlanetDestinationList from '@/components/PlanetDestinationList.vue'
 import { planetDestinationService } from '@/services/planetDestinationService'
 import type { PlanetDestinationAPIResponse, PlanetDestinationExtended } from '@/types'
-import { isValidUrl } from '@/utils'
+import { isValidUrl } from '@/utils/shared'
 import { useFetch, type AfterFetchContext } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 

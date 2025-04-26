@@ -1,6 +1,6 @@
 import { appConfig } from '@/appConfig'
 import { type PlanetDestinationData, type PlanetDestinationExtended } from '@/types'
-import { getRandomIntegersInRange } from '@/utils'
+import { getRandomIntegersInRange } from '@/utils/shared'
 
 export const destinationImagesNames = ['Skiathos', 'Gavdos', 'Naxos', 'Ios'] as const
 
