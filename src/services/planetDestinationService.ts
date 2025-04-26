@@ -7,6 +7,12 @@ export const destinationImagesNames = ['Skiathos', 'Gavdos', 'Naxos', 'Ios'] as 
 export const planetDestinationService = () => {
   const planetImageApiUrl = new URL(appConfig.TRIP_DESTINATION_IMAGE_API_URL)
 
+  const generateIdFromUrl = (url: string): string | null => {
+    const id = url.split('/').filter(Boolean).pop()
+
+    return id && id != '' ? id : null
+  }
+
   const getRandomImageUrl = (): string => {
     const randomImage =
       destinationImagesNames[getRandomIntegersInRange(0, destinationImagesNames.length - 1)]
@@ -28,7 +34,7 @@ export const planetDestinationService = () => {
     ): PlanetDestinationExtended[] {
       return planetDestinations.map((pd) => ({
         ...pd,
-        id: pd.url || pd.name,
+        id: generateIdFromUrl(pd.url) || pd.name,
         imageUrl: getRandomImageUrl(),
         isSelected: false,
       }))

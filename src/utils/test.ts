@@ -15,7 +15,7 @@ export const createPlanetDestinationExtended = (
 ): PlanetDestinationExtended => ({
   ...createPlanetDestinationData(),
   imageUrl: '/tatooine.jpg',
-  id: 'https://host:port/planets/id',
+  id: '1',
   isSelected: false,
   ...overrides,
 })

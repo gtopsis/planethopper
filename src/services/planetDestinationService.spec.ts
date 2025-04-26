@@ -45,7 +45,7 @@ describe('planetDestinationService', () => {
     expect(populatedPlanetDestinations).toHaveLength(2)
     expect(populatedPlanetDestinations[0]).toEqual(
       expect.objectContaining({
-        id: 'https://swapi.py4e.com/api/planets/1/',
+        id: '1',
         isSelected: false,
       }),
     )
@@ -56,7 +56,7 @@ describe('planetDestinationService', () => {
     )
     expect(populatedPlanetDestinations[1]).toEqual(
       expect.objectContaining({
-        id: 'https://host:port/planets/id',
+        id: 'id',
         isSelected: false,
       }),
     )
