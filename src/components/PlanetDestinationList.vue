@@ -35,10 +35,10 @@ const onSelectPlanetDestination = (planeDestinationId: PlanetDestinationExtended
 
   <p
     v-else
-    class="text-text-secondary flex items-center justify-center space-x-2 rounded-lg p-4 text-sm"
+    class="text-text-secondary flex items-center justify-center rounded-lg p-4 text-sm"
     data-testid="planet-destination-list-empty"
   >
-    <IconInfo class="h-5 w-5" />
+    <IconInfo class="mr-2" size="sm" />
     <span>The expansion of the universe did not leave a planet to visit</span>
   </p>
 </template>
