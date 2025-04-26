@@ -2,15 +2,15 @@
 import { computed } from 'vue'
 
 interface Props {
-  error: Error | null
+  error: string | null
 }
-const { error } = defineProps<Props>()
+const props = defineProps<Props>()
 
-const message = computed(() => error || 'Something wrong happened. Please try again!')
+const message = computed(() => props.error || 'Something wrong happened. Please try again!')
 </script>
 
 <template>
-  <div v-if="error" class="border-error text-error border-l-4 bg-orange-100 p-4" role="alert">
+  <div class="border-error text-error border-l-4 bg-orange-100 p-4" role="alert">
     <h3 class="text-lg font-bold">An error occurred</h3>
     <p>{{ message }}</p>
   </div>
