@@ -4,20 +4,20 @@ import { computed } from 'vue'
 
 export interface Props {
   planetDestination: Omit<PlanetDestinationExtended, 'isSelected'>
-  isSelected: PlanetDestinationExtended['isSelected']
+  isSelected?: PlanetDestinationExtended['isSelected']
 }
 
-const { planetDestination, isSelected = false } = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), { isSelected: false })
 const emit = defineEmits<{
   (e: 'select', value: Event): void
 }>()
 
 const dynamicClasses = computed(() =>
-  isSelected
+  props.isSelected
     ? ['border-accent', 'shadow-lg', 'hover:cursor-auto']
     : ['border-surface', 'shadow-md', 'hover:cursor-pointer'],
 )
-const tooltipText = computed(() => (isSelected ? '' : 'Add destination to travel plan'))
+const tooltipText = computed(() => (props.isSelected ? '' : 'Add destination to travel plan'))
 
 const isNumeric = (value: string): boolean => {
   return !Number.isNaN(Number(value)) && value.trim() !== ''
@@ -35,11 +35,11 @@ const convertNumericValueToUSFormat = (numericValue: number | string): string =>
 }
 
 const formattedPopulation = computed(() =>
-  convertNumericValueToUSFormat(planetDestination.population),
+  convertNumericValueToUSFormat(props.planetDestination.population),
 )
 
 const onClick = (event: Event) => {
-  if (isSelected) return
+  if (props.isSelected) return
 
   emit('select', event)
 }

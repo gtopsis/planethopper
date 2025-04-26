@@ -4,9 +4,9 @@ import type { PlanetDestinationExtended } from '@/types'
 import PlanetDestinationListItem from './PlanetDestinationListItem.vue'
 
 export interface Props {
-  planetDestinationsWithState: PlanetDestinationExtended[]
+  planetDestinationsWithState?: PlanetDestinationExtended[]
 }
-const { planetDestinationsWithState = [] } = defineProps<Props>()
+withDefaults(defineProps<Props>(), { planetDestinationsWithState: () => [] })
 
 const emit = defineEmits<{
   (e: 'selectPlanetDestination', planeDestinationName: PlanetDestinationExtended['id']): void
