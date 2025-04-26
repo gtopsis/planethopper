@@ -19,8 +19,21 @@ const dynamicClasses = computed(() =>
 )
 const tooltipText = computed(() => (isSelected ? '' : 'Add destination to travel plan'))
 
-const convertNumericValueToUSFormat = (numericValue: number): string =>
-  Intl.NumberFormat('es-US').format(numericValue)
+const isNumeric = (value: string): boolean => {
+  return !Number.isNaN(Number(value)) && value.trim() !== ''
+}
+
+const convertNumericValueToUSFormat = (numericValue: number | string): string => {
+  if (typeof numericValue === 'string' && !isNumeric(numericValue)) {
+    return '-'
+  }
+
+  const formattedValue: number =
+    typeof numericValue === 'string' ? Number(numericValue) : numericValue
+
+  return Intl.NumberFormat('es-US').format(formattedValue)
+}
+
 const formattedPopulation = computed(() =>
   convertNumericValueToUSFormat(planetDestination.population),
 )

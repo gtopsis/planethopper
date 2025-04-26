@@ -8,7 +8,7 @@ export interface PlanetDestinationAPIResponse {
 export interface PlanetDestinationData {
   name: string
   terrain: string
-  population: number
+  population: string
   url: string
 }
 
