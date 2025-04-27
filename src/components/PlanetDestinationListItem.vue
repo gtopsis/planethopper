@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import BaseImageSkeletonPlaceholder from '@/components/BaseImageSkeletonPlaceholder.vue'
 import type { PlanetDestinationExtended } from '@/types'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 export interface Props {
   planetDestination: Omit<PlanetDestinationExtended, 'isSelected'>
@@ -11,6 +12,8 @@ const props = withDefaults(defineProps<Props>(), { isSelected: false })
 const emit = defineEmits<{
   (e: 'select', value: Event): void
 }>()
+
+const isImageLoaded = ref(false)
 
 const dynamicClasses = computed(() =>
   props.isSelected
@@ -43,6 +46,10 @@ const onClick = (event: Event) => {
 
   emit('select', event)
 }
+
+const onLoadImage = () => {
+  isImageLoaded.value = true
+}
 </script>
 
 <template>
@@ -54,11 +61,15 @@ const onClick = (event: Event) => {
     @click="onClick($event)"
   >
     <div class="h-20 w-20 flex-shrink-0">
+      <BaseImageSkeletonPlaceholder v-if="!isImageLoaded" class="h-full w-full" />
+
       <img
+        v-show="isImageLoaded"
         :src="planetDestination.imageUrl"
         :alt="`Image of planet ${planetDestination.name}`"
         class="h-full w-full rounded-lg object-cover"
         :data-testid="`planet-destination-${planetDestination.id}-image`"
+        @load="onLoadImage"
       />
     </div>
 
