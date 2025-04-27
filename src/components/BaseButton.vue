@@ -4,7 +4,7 @@ import { computed } from 'vue'
 interface Props {
   id?: string
   type?: 'regular' | 'icon' | 'text'
-  theme?: 'primary' | 'secondary' | 'accent'
+  theme?: 'primary' | 'secondary' | 'accent' | 'error'
   disabled?: boolean
   title?: string
   ariaLabel?: string
@@ -36,6 +36,12 @@ const themeClassesMap: Record<typeof props.theme, Record<string, boolean>> = {
     'text-gray-700': true,
     'hover:bg-accent-300': true,
     'focus:ring-accent-300': true,
+  },
+  error: {
+    'bg-transparent': true,
+    'text-error': true,
+    'hover:bg-transparent': true,
+    'focus:ring-transparent': true,
   },
 }
 const currentThemeClasses = computed(() => themeClassesMap[props.theme] || {})
