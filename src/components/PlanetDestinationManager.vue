@@ -64,6 +64,10 @@ const fetchMorePlanetDestinations = () => {
 
 <template>
   <div class="flex w-full flex-col space-y-2">
+    <p class="px-2 py-1 text-center font-bold">
+      <small>Choose up to 5 destinations for you trip plan</small>
+    </p>
+
     <PlanetDestinationList
       v-if="allPlanetDestinations !== null"
       class="w-full"
