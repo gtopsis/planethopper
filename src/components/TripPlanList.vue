@@ -19,7 +19,9 @@ defineProps<Props>()
       class="bg-background mb-2 w-[80%] rounded-lg px-2 text-wrap shadow last:mb-0 md:py-1"
       data-testid="trip-plan-list-item"
     >
-      <span class="prose text-text-secondary text-sm">{{ name }}</span>
+      <span class="prose text-text-secondary text-sm" data-testid="trip-plan-list-item-name">{{
+        name
+      }}</span>
     </li>
   </ul>
 
