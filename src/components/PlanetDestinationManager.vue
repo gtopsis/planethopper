@@ -23,7 +23,10 @@ const {
   refetch: true,
   afterFetch(ctx: AfterFetchContext<PlanetDestinationAPIResponse>) {
     if (ctx.data) {
-      ctx.data.results = populatePlanetDestinations(ctx.data.results || [])
+      const resultsWithValidDestinations = (ctx.data.results || []).filter(
+        (pd) => pd.name !== 'unknown',
+      )
+      ctx.data.results = populatePlanetDestinations(resultsWithValidDestinations)
     }
 
     return ctx
