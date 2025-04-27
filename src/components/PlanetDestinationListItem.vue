@@ -37,6 +37,9 @@ const convertNumericValueToUSFormat = (numericValue: number | string): string =>
   return Intl.NumberFormat('es-US').format(formattedValue)
 }
 
+const formattedTerrain = computed(() =>
+  props.planetDestination.terrain !== 'unknown' ? props.planetDestination.terrain : '-',
+)
 const formattedPopulation = computed(() =>
   convertNumericValueToUSFormat(props.planetDestination.population),
 )
@@ -83,7 +86,7 @@ const onLoadImage = () => {
       <span
         class="text-text-secondary text-sm"
         :data-testid="`planet-destination-${planetDestination.id}-terrain`"
-        >{{ planetDestination.terrain }}</span
+        >{{ formattedTerrain }}</span
       >
       <span
         class="text-text-secondary mt-1 text-sm"

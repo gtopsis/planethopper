@@ -38,6 +38,26 @@ describe('PlanetDestinationListItem', () => {
     expect(wrapper.find(generateElementTestSelector(1, 'population')).text()).toBe('200,000')
   })
 
+  it(`displays a hyphen instead of "unknown" when planet terrain value is equals to 'unknown'`, () => {
+    const wrapper = mount(PlanetDestinationListItem, {
+      props: createPlanetDestinationListItemProps({
+        planetDestination: createPlanetDestinationExtended({ terrain: 'unknown' }),
+      }),
+    })
+
+    expect(wrapper.find(generateElementTestSelector(1, 'terrain')).text()).toBe('-')
+  })
+
+  it(`displays a hyphen instead of "unknown" when planet population value is equals to 'unknown'`, () => {
+    const wrapper = mount(PlanetDestinationListItem, {
+      props: createPlanetDestinationListItemProps({
+        planetDestination: createPlanetDestinationExtended({ population: 'unknown' }),
+      }),
+    })
+
+    expect(wrapper.find(generateElementTestSelector(1, 'population')).text()).toBe('-')
+  })
+
   it('applies correct classes when not selected', () => {
     const wrapper = mount(PlanetDestinationListItem, {
       props: createPlanetDestinationListItemProps(),
