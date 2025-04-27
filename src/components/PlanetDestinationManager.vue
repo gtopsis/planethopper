@@ -23,7 +23,10 @@ const {
   refetch: true,
   afterFetch(ctx: AfterFetchContext<PlanetDestinationAPIResponse>) {
     if (ctx.data) {
-      ctx.data.results = populatePlanetDestinations(ctx.data.results || [])
+      const resultsWithValidDestinations = (ctx.data.results || []).filter(
+        (pd) => pd.name !== 'unknown',
+      )
+      ctx.data.results = populatePlanetDestinations(resultsWithValidDestinations)
     }
 
     return ctx
@@ -61,6 +64,10 @@ const fetchMorePlanetDestinations = () => {
 
 <template>
   <div class="flex w-full flex-col space-y-2">
+    <p class="px-2 py-1 text-center font-bold">
+      <small>Choose up to 5 destinations for you trip plan</small>
+    </p>
+
     <PlanetDestinationList
       v-if="allPlanetDestinations !== null"
       class="w-full"
