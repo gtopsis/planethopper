@@ -17,3 +17,5 @@ export interface PlanetDestinationExtended extends Exclude<PlanetDestinationData
   imageUrl: string
   isSelected: boolean
 }
+
+export type TripPlanItem = Pick<PlanetDestinationExtended, 'id' | 'name'>
