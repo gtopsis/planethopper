@@ -41,6 +41,33 @@ describe('planetHopperStore', () => {
     expect(store.tripPlanItems).toEqual([{ id: '1', name: 'Mars' }])
   })
 
+  it('should not select planet destination or add it to trip plan when the latest has already maximum number of destinations', () => {
+    // Note: default value for maximum number of trip plan destinations is equal to 5
+    const planetDestinations = [
+      createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: true }),
+      createPlanetDestinationExtended({ id: '2', name: 'Venus', isSelected: true }),
+      createPlanetDestinationExtended({ id: '3', name: 'Mercury', isSelected: true }),
+      createPlanetDestinationExtended({ id: '4', name: 'Jupiter', isSelected: true }),
+      createPlanetDestinationExtended({ id: '5', name: 'Uranus', isSelected: true }),
+      createPlanetDestinationExtended({ id: '6', name: 'Earth', isSelected: false }),
+    ]
+    store.addPlanetDestinations(planetDestinations)
+    const tripPlanItems = planetDestinations
+      .filter((pd) => pd.id !== '6')
+      .map((pd) => ({ id: pd.id, name: pd.name }))
+    store.addItemToTripPlan(tripPlanItems[0])
+    store.addItemToTripPlan(tripPlanItems[1])
+    store.addItemToTripPlan(tripPlanItems[2])
+    store.addItemToTripPlan(tripPlanItems[3])
+    store.addItemToTripPlan(tripPlanItems[4])
+
+    store.selectPlanetDestinationWithId('6')
+
+    expect(store.totalPlanetDestinations[5].isSelected).toBe(false)
+    expect(store.tripPlanItems).toHaveLength(5)
+    expect(store.tripPlanItems).toEqual(expect.not.arrayContaining([{ id: '6', name: 'Earth' }]))
+  })
+
   it('does nothing when selecting non-existent planet', () => {
     const planetDestinations = [
       createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: false }),
