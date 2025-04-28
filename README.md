@@ -22,8 +22,6 @@ A traveling application that lets users browse through planets and plan their in
   pnpm run dev
   ```
 
-  Visit http://localhost:5173
-
 - Using NPM
 
   > **_NOTE:_** Node v20.9.0 and above is recommended
@@ -33,4 +31,4 @@ A traveling application that lets users browse through planets and plan their in
   npm run dev
   ```
 
-  Visit http://localhost:5173
+Visit http://localhost:5173
