@@ -9,22 +9,20 @@ import { usePlanetHopperStore } from '@/stores/planetHopperStore'
 import type { PlanetDestinationAPIResponse, PlanetDestinationExtended } from '@/types'
 import { isValidUrl } from '@/utils/shared'
 import { useFetch, type AfterFetchContext } from '@vueuse/core'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 
 const { createPaginatedApiUrlString: createPaginatedApiUrl, populatePlanetDestinations } =
   planetDestinationService()
 const planetDestinationStore = usePlanetHopperStore()
 
-const planetDestinationApiUrl = ref(createPaginatedApiUrl())
-
+const nextPageUrl = computed(() => planetDestinationStore.planetDestinationApiNextPageUrl)
 const {
   isFetching,
   error,
   data: currentPageDestinations,
   execute,
-} = useFetch<PlanetDestinationAPIResponse>(planetDestinationApiUrl, {
+} = useFetch<PlanetDestinationAPIResponse>(nextPageUrl, {
   immediate: false,
-  refetch: true,
   afterFetch(ctx: AfterFetchContext<PlanetDestinationAPIResponse>) {
     if (ctx.data) {
       const resultsWithValidDestinations = (ctx.data.results || []).filter(
@@ -41,20 +39,22 @@ const {
 
 watch(currentPageDestinations, (v) => {
   planetDestinationStore.addPlanetDestinations(v?.results || [])
+  console.log('🚀 ~ watch ~ v?.next:', v?.next)
+  planetDestinationStore.setPlanetDestinationApiNextPageUrl(v?.next)
 })
 
 const onSelectPlanetDestination = (id: PlanetDestinationExtended['id']) => {
   planetDestinationStore.selectPlanetDestinationWithId(id)
 }
 
-const paginationNextPageUrlString = computed(() => currentPageDestinations.value?.next)
 const fetchMorePlanetDestinations = () => {
+  // THA (greek): continue building the alternative way of handling manually the pagination (playing with curr/next page numbers)
   if (
-    paginationNextPageUrlString.value &&
-    typeof paginationNextPageUrlString.value === 'string' &&
-    isValidUrl(paginationNextPageUrlString.value, createPaginatedApiUrl())
+    nextPageUrl.value &&
+    typeof nextPageUrl.value === 'string' &&
+    isValidUrl(nextPageUrl.value, createPaginatedApiUrl())
   ) {
-    planetDestinationApiUrl.value = paginationNextPageUrlString.value
+    execute()
   }
 }
 
@@ -91,7 +91,7 @@ onMounted(() => {
         v-if="!isFetching"
         theme="primary"
         aria-label="Load more destinations to planets"
-        :disabled="paginationNextPageUrlString === null"
+        :disabled="nextPageUrl === ''"
         @click="fetchMorePlanetDestinations"
       >
         <IconDownload class="mr-2" size="sm" />

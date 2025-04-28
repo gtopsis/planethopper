@@ -1,9 +1,13 @@
 import { appConfig } from '@/appConfig'
+import { planetDestinationService } from '@/services/planetDestinationService'
 import type { PlanetDestinationExtended, TripPlanItem } from '@/types'
 import { useLocalStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
+import { computed } from 'vue'
 
 export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
+  const { createPaginatedApiUrlString } = planetDestinationService()
+
   const totalPlanetDestinations = useLocalStorage<PlanetDestinationExtended[]>(
     appConfig.STORE_KEY_PLANET_DESTINATIONS,
     [],
@@ -12,6 +16,13 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
   const tripPlanItems = useLocalStorage<TripPlanItem[]>(appConfig.STORE_KEY_TRIP_PLAN, [], {
     deep: true,
   })
+  const nextPageUrl = useLocalStorage<string>(
+    'planet_destination_api_next_page_url',
+    createPaginatedApiUrlString(),
+    {},
+  )
+
+  const planetDestinationApiNextPageUrl = computed(() => nextPageUrl.value)
 
   const addPlanetDestinations = (destinations: PlanetDestinationExtended[]) => {
     totalPlanetDestinations.value = totalPlanetDestinations.value.concat(destinations)
@@ -43,18 +54,24 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
     tripPlanItems.value = []
   }
 
+  const setPlanetDestinationApiNextPageUrl = (url: string | undefined | null) => {
+    nextPageUrl.value = url ?? ''
+  }
+
   const reset = () => {
     totalPlanetDestinations.value = []
     tripPlanItems.value = []
   }
 
   return {
+    planetDestinationApiNextPageUrl,
     totalPlanetDestinations,
     tripPlanItems,
     addPlanetDestinations,
     selectPlanetDestinationWithId,
     addItemToTripPlan,
     removeAllItemsFromTripPlan,
+    setPlanetDestinationApiNextPageUrl,
     reset,
   }
 })
