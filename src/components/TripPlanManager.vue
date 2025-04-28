@@ -15,7 +15,7 @@ const removeAllTripPlanItems = () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
+  <div class="prose lg:prose-xl flex flex-col items-center">
     <p class="mb-1 px-2 py-1 text-center font-bold">
       <span>Your planetary route</span>
     </p>
@@ -24,7 +24,7 @@ const removeAllTripPlanItems = () => {
 
     <BaseButton
       v-if="tripPlanItems.length > 0"
-      class="mt-2"
+      class="md:mt-2"
       theme="error"
       aria-label="Load more destinations to planets"
       @click="removeAllTripPlanItems"

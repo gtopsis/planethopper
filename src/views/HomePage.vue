@@ -6,12 +6,14 @@ const appName = 'Planet Hopper'
 </script>
 
 <template>
-  <div class="prose lg:prose-xl font-primary bg-background flex h-screen flex-col overflow-y-auto">
+  <div class="font-primary bg-background flex h-screen flex-col overflow-y-auto">
     <header
-      class="bg-background sticky top-0 z-10 h-[60px] w-full shrink-0 p-4 text-left md:h-[70px] md:text-center"
+      class="bg-background sticky top-0 z-10 h-[50px] w-full shrink-0 p-3 text-left md:h-[70px] md:p-4 md:text-center"
       aria-label="Application header"
     >
-      <h1 class="text-text-primary text-2xl font-bold md:text-3xl">{{ appName }}</h1>
+      <h1 class="prose lg:prose-xl text-text-primary text-lg font-bold md:text-3xl">
+        {{ appName }}
+      </h1>
     </header>
 
     <div class="container mx-auto md:px-4">
@@ -23,7 +25,7 @@ const appName = 'Planet Hopper'
         </main>
 
         <aside
-          class="bg-primary sticky top-15 order-1 max-h-[400px] p-4 md:top-17 md:order-2 md:col-span-4 md:h-[calc(100vh-75px)] md:rounded-lg md:shadow lg:col-span-3"
+          class="bg-secondary sticky top-12 order-1 max-h-[400px] px-3 pb-2 md:top-10 md:order-2 md:col-span-4 md:h-[calc(100vh-85px)] md:rounded-lg md:p-4 md:shadow lg:col-span-3"
         >
           <TripPlanManager />
         </aside>

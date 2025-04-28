@@ -66,7 +66,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex w-full flex-col space-y-2">
+  <div class="prose lg:prose-xl flex w-full flex-col space-y-2">
     <p
       v-if="planetDestinationStore.totalPlanetDestinations.length > 0"
       class="px-2 py-1 text-center"

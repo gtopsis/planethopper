@@ -19,7 +19,7 @@ defineProps<Props>()
       <li
         v-for="{ id, name } in tripPlanItems"
         :key="id"
-        class="relative ms-5 mb-3"
+        class="relative ms-5 mb-2 md:mb-3"
         data-testid="trip-plan-list-item"
       >
         <span
@@ -28,9 +28,12 @@ defineProps<Props>()
           <IconPlanet />
         </span>
         <div
-          class="items-center justify-between rounded-lg border border-gray-200 bg-white px-2 py-1 shadow-xs sm:flex dark:border-gray-600 dark:bg-gray-700"
+          class="items-center justify-between rounded-lg border border-gray-200 bg-white px-2 shadow-xs sm:flex dark:border-gray-600 dark:bg-gray-700"
         >
-          <span class="prose text-text-secondary text-sm" data-testid="trip-plan-list-item-name">
+          <span
+            class="prose text-text-secondary text-xs md:text-sm"
+            data-testid="trip-plan-list-item-name"
+          >
             {{ name }}
           </span>
         </div>

@@ -17,7 +17,7 @@ const isImageLoaded = ref(false)
 
 const dynamicClasses = computed(() =>
   props.isSelected
-    ? ['border-accent', 'shadow-lg', 'hover:cursor-auto']
+    ? ['border-secondary', 'shadow-lg', 'hover:cursor-auto']
     : ['border-surface', 'shadow-md', 'hover:cursor-pointer'],
 )
 const tooltipText = computed(() => (props.isSelected ? '' : 'Add destination to travel plan'))
@@ -57,13 +57,13 @@ const onLoadImage = () => {
 
 <template>
   <button
-    class="bg-surface flex w-full rounded-lg border-1 p-4 transition-shadow hover:shadow-lg"
+    class="bg-surface flex w-full rounded-lg border-2 p-2 transition-shadow hover:shadow-lg md:p-3"
     :class="dynamicClasses"
     :title="tooltipText"
     :data-testid="`planet-destination-${planetDestination.id}`"
     @click="onClick($event)"
   >
-    <div class="h-20 w-20 flex-shrink-0">
+    <div class="h-15 w-15 flex-shrink-0 md:h-20 md:w-20">
       <BaseImageSkeletonPlaceholder v-if="!isImageLoaded" class="h-full w-full" />
 
       <img
@@ -78,18 +78,18 @@ const onLoadImage = () => {
 
     <div class="ml-4 flex flex-grow flex-col text-left">
       <h2
-        class="text-text-primary flex-grow text-xl font-bold"
+        class="text-text-primary flex-grow text-sm font-bold md:text-xl"
         :data-testid="`planet-destination-${planetDestination.id}-name`"
       >
         {{ planetDestination.name }}
       </h2>
       <span
-        class="text-text-secondary text-sm"
+        class="text-text-secondary text-xs md:text-sm"
         :data-testid="`planet-destination-${planetDestination.id}-terrain`"
         >{{ formattedTerrain }}</span
       >
       <span
-        class="text-text-secondary mt-1 text-sm"
+        class="text-text-secondary mt-1 text-xs md:text-sm"
         :data-testid="`planet-destination-${planetDestination.id}-population`"
         >{{ formattedPopulation }}</span
       >
