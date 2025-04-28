@@ -45,8 +45,6 @@ docker run -p 80:80 planethopper-prod:1.0.0
 - **Responsiveness**: App has been designed to be accessible from users in both small and large
   devices
 - **Portability**: well, docker!
-- Respect to browser's theme settings: Color palettes for both dark and light modes of a browser's
-  settings have been applied, in order to be accessible regardless the active mode. . Improvements
-  on color palettes needed.
+- **State Preservation**: Use local storage of browser to retain user activity after page refresh
 - Focus on good DX and UX, applying numerous eslint plugins(accessibility, organize imports and
   tailwind classes) as well as setting git hooks on commit actions
