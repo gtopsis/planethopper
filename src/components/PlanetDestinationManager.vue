@@ -39,7 +39,6 @@ const {
 
 watch(currentPageDestinations, (v) => {
   planetDestinationStore.addPlanetDestinations(v?.results || [])
-  console.log('🚀 ~ watch ~ v?.next:', v?.next)
   planetDestinationStore.setPlanetDestinationApiNextPageUrl(v?.next)
 })
 
