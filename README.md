@@ -2,6 +2,10 @@
 
 A traveling application that lets users browse through planets and plan their interstellar journey
 
+## Live Demo ⚡
+
+Visit [planet-hopper.pages.dev](https://planet-hopper.pages.dev)
+
 ## Run the project locally
 
 ### Serve app for Development
