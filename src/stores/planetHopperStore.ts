@@ -18,6 +18,10 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
   }
 
   const selectPlanetDestinationWithId = (id: PlanetDestinationExtended['id']) => {
+    if (tripPlanItems.value.length >= appConfig.TRIP_PLAN_DESTINATIONS_MAX_NUMBER) {
+      return
+    }
+
     const found = totalPlanetDestinations.value.find((d) => d.id === id)
     if (!found) return
 
