@@ -9,8 +9,8 @@ A traveling application that lets users browse through planets and plan their in
 - Using **Docker**
 
   ```bash
-  docker build -t planethopper -f Dockerfile.dev .
-  docker run --rm -p 5173:5173 planethopper:latest
+  docker build -t planethopper-dev -f Dockerfile.dev .
+  docker run --rm -p 5173:5173 planethopper-dev:latest
   ```
 
 - Using PNPM (v10.6.1 recommended) :)
@@ -32,3 +32,10 @@ A traveling application that lets users browse through planets and plan their in
   ```
 
 Visit http://localhost:5173
+
+### Build app for Production
+
+```bash
+docker build -t planethopper-prod:1.0.0 -f  Dockerfile.prod .
+docker run -p 80:80 planethopper-prod:1.0.0
+```
