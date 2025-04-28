@@ -17,7 +17,7 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
     deep: true,
   })
   const nextPageUrl = useLocalStorage<string>(
-    'planet_destination_api_next_page_url',
+    appConfig.STORE_KEY_PLANET_DESTINATIONS_API_NEXT_PAGE_URL,
     createPaginatedApiUrlString(),
     {},
   )
