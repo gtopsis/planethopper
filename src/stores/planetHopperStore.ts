@@ -13,10 +13,6 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
     deep: true,
   })
 
-  const setPlanetDestinations = (destinations: PlanetDestinationExtended[]) => {
-    totalPlanetDestinations.value = destinations
-  }
-
   const addPlanetDestinations = (destinations: PlanetDestinationExtended[]) => {
     totalPlanetDestinations.value = totalPlanetDestinations.value.concat(destinations)
   }
@@ -51,7 +47,6 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
   return {
     totalPlanetDestinations,
     tripPlanItems,
-    setPlanetDestinations,
     addPlanetDestinations,
     selectPlanetDestinationWithId,
     addItemToTripPlan,

@@ -17,32 +17,15 @@ describe('planetHopperStore', () => {
     expect(store.tripPlanItems).toEqual([])
   })
 
-  it('should set planet destinations', () => {
+  it('should add planet destinations', () => {
     const planetDestinations = [
       createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: false }),
       createPlanetDestinationExtended({ id: '2', name: 'Venus', isSelected: false }),
     ]
 
-    store.setPlanetDestinations(planetDestinations)
+    store.addPlanetDestinations(planetDestinations)
 
     expect(store.totalPlanetDestinations).toEqual(planetDestinations)
-  })
-
-  it('should add planet destinations', () => {
-    const initialPlanetDestinationsList = [
-      createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: false }),
-    ]
-    const additionalPlanetDestinations = [
-      createPlanetDestinationExtended({ id: '2', name: 'Venus', isSelected: false }),
-    ]
-
-    store.setPlanetDestinations(initialPlanetDestinationsList)
-    store.addPlanetDestinations(additionalPlanetDestinations)
-
-    expect(store.totalPlanetDestinations).toEqual([
-      ...initialPlanetDestinationsList,
-      ...additionalPlanetDestinations,
-    ])
   })
 
   it('should select planet destination and add it to trip plan', () => {
@@ -50,7 +33,7 @@ describe('planetHopperStore', () => {
       createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: false }),
       createPlanetDestinationExtended({ id: '2', name: 'Venus', isSelected: false }),
     ]
-    store.setPlanetDestinations(planetDestinations)
+    store.addPlanetDestinations(planetDestinations)
 
     store.selectPlanetDestinationWithId('1')
 
@@ -62,7 +45,7 @@ describe('planetHopperStore', () => {
     const planetDestinations = [
       createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: false }),
     ]
-    store.setPlanetDestinations(planetDestinations)
+    store.addPlanetDestinations(planetDestinations)
 
     store.selectPlanetDestinationWithId('999')
 
@@ -82,7 +65,7 @@ describe('planetHopperStore', () => {
       createPlanetDestinationExtended({ id: '1', name: 'Mars', isSelected: true }),
       createPlanetDestinationExtended({ id: '2', name: 'Venus', isSelected: true }),
     ]
-    store.setPlanetDestinations(destinations)
+    store.addPlanetDestinations(destinations)
     store.addItemToTripPlan({ id: '1', name: 'Mars' })
     store.addItemToTripPlan({ id: '2', name: 'Venus' })
 
