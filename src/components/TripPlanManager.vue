@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import TripPlanList from '@/components/TripPlanList.vue'
 import IconClear from '@/components/icons/iconClear.vue'
-import { ref } from 'vue'
+import { usePlanetHopperStore } from '@/stores/planetHopperStore'
+import { computed } from 'vue'
 import BaseButton from './BaseButton.vue'
 
-const tripPlanItems = ref([
-  { name: 'giorgos', id: '1' },
-  { name: 'aris', id: '2' },
-])
+const planetDestinationStore = usePlanetHopperStore()
+
+const tripPlanItems = computed(() => planetDestinationStore.tripPlanItems)
 
 const removeAllTripPlanItems = () => {
-  tripPlanItems.value = []
+  planetDestinationStore.removeAllItemsFromTripPlan()
 }
 </script>
 

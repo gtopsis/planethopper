@@ -5,13 +5,15 @@ import ErrorAlert from '@/components/ErrorAlert.vue'
 import IconDownload from '@/components/icons/IconDownload.vue'
 import PlanetDestinationList from '@/components/PlanetDestinationList.vue'
 import { planetDestinationService } from '@/services/planetDestinationService'
+import { usePlanetHopperStore } from '@/stores/planetHopperStore'
 import type { PlanetDestinationAPIResponse, PlanetDestinationExtended } from '@/types'
 import { isValidUrl } from '@/utils/shared'
 import { useFetch, type AfterFetchContext } from '@vueuse/core'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 const { createPaginatedApiUrlString: createPaginatedApiUrl, populatePlanetDestinations } =
   planetDestinationService()
+const planetDestinationStore = usePlanetHopperStore()
 
 const planetDestinationApiUrl = ref(createPaginatedApiUrl())
 
@@ -19,7 +21,9 @@ const {
   isFetching,
   error,
   data: currentPageDestinations,
+  execute,
 } = useFetch<PlanetDestinationAPIResponse>(planetDestinationApiUrl, {
+  immediate: false,
   refetch: true,
   afterFetch(ctx: AfterFetchContext<PlanetDestinationAPIResponse>) {
     if (ctx.data) {
@@ -35,20 +39,15 @@ const {
   .get()
   .json<PlanetDestinationAPIResponse>()
 
-const allPlanetDestinations = ref<PlanetDestinationExtended[] | null>(null)
 watch(currentPageDestinations, (v) => {
-  allPlanetDestinations.value = (allPlanetDestinations.value || []).concat(v?.results || [])
+  planetDestinationStore.addPlanetDestinations(v?.results || [])
 })
 
 const onSelectPlanetDestination = (id: PlanetDestinationExtended['id']) => {
-  const found = allPlanetDestinations.value?.find((pd) => pd.id === id)
-  if (!found) return
-
-  found.isSelected = true
+  planetDestinationStore.selectPlanetDestinationWithId(id)
 }
 
 const paginationNextPageUrlString = computed(() => currentPageDestinations.value?.next)
-
 const fetchMorePlanetDestinations = () => {
   if (
     paginationNextPageUrlString.value &&
@@ -57,21 +56,31 @@ const fetchMorePlanetDestinations = () => {
   ) {
     planetDestinationApiUrl.value = paginationNextPageUrlString.value
   }
-
-  // TODO: handle error case
 }
+
+onMounted(() => {
+  if (planetDestinationStore.totalPlanetDestinations.length === 0) {
+    execute()
+  }
+})
 </script>
 
 <template>
   <div class="flex w-full flex-col space-y-2">
-    <p class="px-2 py-1 text-center font-bold">
-      <small>Choose up to 5 destinations for you trip plan</small>
+    <p
+      v-if="planetDestinationStore.totalPlanetDestinations.length > 0"
+      class="px-2 py-1 text-center"
+    >
+      <small class="text-tertiary"
+        >Choose up to 5 destinations among
+        {{ planetDestinationStore.totalPlanetDestinations.length }} for you trip plan</small
+      >
     </p>
 
     <PlanetDestinationList
-      v-if="allPlanetDestinations !== null"
+      v-if="planetDestinationStore.totalPlanetDestinations !== null"
       class="w-full"
-      :planet-destinations-with-state="allPlanetDestinations"
+      :planet-destinations-with-state="planetDestinationStore.totalPlanetDestinations"
       @select-planet-destination="onSelectPlanetDestination"
     />
 
