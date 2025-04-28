@@ -43,6 +43,11 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
     tripPlanItems.value = []
   }
 
+  const reset = () => {
+    totalPlanetDestinations.value = []
+    tripPlanItems.value = []
+  }
+
   return {
     totalPlanetDestinations,
     tripPlanItems,
@@ -51,5 +56,6 @@ export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
     selectPlanetDestinationWithId,
     addItemToTripPlan,
     removeAllItemsFromTripPlan,
+    reset,
   }
 })
