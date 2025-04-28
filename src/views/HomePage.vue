@@ -9,6 +9,7 @@ const appName = 'Planet Hopper'
   <div class="prose lg:prose-xl font-primary bg-background flex h-screen flex-col overflow-y-auto">
     <header
       class="bg-background sticky top-0 z-10 h-[60px] w-full shrink-0 p-4 text-left md:h-[70px] md:text-center"
+      aria-label="Application header"
     >
       <h1 class="text-text-primary text-2xl font-bold md:text-3xl">{{ appName }}</h1>
     </header>
@@ -22,7 +23,7 @@ const appName = 'Planet Hopper'
         </main>
 
         <aside
-          class="bg-primary sticky top-15 order-1 max-h-[350px] p-4 md:top-17 md:order-2 md:col-span-4 md:h-[calc(100vh-75px)] md:rounded-lg md:shadow lg:col-span-3"
+          class="bg-primary sticky top-15 order-1 max-h-[400px] p-4 md:top-17 md:order-2 md:col-span-4 md:h-[calc(100vh-75px)] md:rounded-lg md:shadow lg:col-span-3"
         >
           <TripPlanManager />
         </aside>
