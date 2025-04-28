@@ -25,7 +25,7 @@ const appName = 'Planet Hopper'
         </main>
 
         <aside
-          class="bg-secondary sticky top-12 order-1 max-h-[400px] px-3 pb-2 md:top-10 md:order-2 md:col-span-4 md:h-[calc(100vh-85px)] md:rounded-lg md:p-4 md:shadow lg:col-span-3"
+          class="bg-secondary sticky top-13 order-1 max-h-[400px] px-3 pb-2 md:top-18 md:order-2 md:col-span-4 md:max-h-[calc(100vh-85px)] md:rounded-lg md:p-4 md:shadow lg:col-span-3"
         >
           <TripPlanManager />
         </aside>
