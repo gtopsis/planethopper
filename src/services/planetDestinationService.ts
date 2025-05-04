@@ -1,6 +1,6 @@
 import { appConfig } from '@/appConfig'
 import { type PlanetDestinationData, type PlanetDestinationExtended } from '@/types'
-import { getRandomIntegersInRange } from '@/utils/shared'
+import { getRandomIntegerInRange } from '@/utils/shared'
 
 export const destinationImagesNames = ['Skiathos', 'Gavdos', 'Naxos', 'Ios'] as const
 
@@ -15,7 +15,7 @@ export const planetDestinationService = () => {
 
   const getRandomImageUrl = (): string => {
     const randomImage =
-      destinationImagesNames[getRandomIntegersInRange(0, destinationImagesNames.length - 1)]
+      destinationImagesNames[getRandomIntegerInRange(0, destinationImagesNames.length - 1)]
     const imageUrl = new URL(`${randomImage}.jpg`, planetImageApiUrl)
 
     return imageUrl.toString()

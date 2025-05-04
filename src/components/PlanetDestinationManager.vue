@@ -7,7 +7,7 @@ import PlanetDestinationList from '@/components/PlanetDestinationList.vue'
 import { planetDestinationService } from '@/services/planetDestinationService'
 import { usePlanetHopperStore } from '@/stores/planetHopperStore'
 import type { PlanetDestinationAPIResponse, PlanetDestinationExtended } from '@/types'
-import { isValidUrl } from '@/utils/shared'
+import { areUrlsSimilar } from '@/utils/shared'
 import { useFetch, type AfterFetchContext } from '@vueuse/core'
 import { computed, onMounted, watch } from 'vue'
 
@@ -51,7 +51,7 @@ const fetchMorePlanetDestinations = () => {
   if (
     nextPageUrl.value &&
     typeof nextPageUrl.value === 'string' &&
-    isValidUrl(nextPageUrl.value, createPaginatedApiUrl())
+    areUrlsSimilar(nextPageUrl.value, createPaginatedApiUrl())
   ) {
     execute()
   }

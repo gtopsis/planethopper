@@ -1,7 +1,7 @@
-export const getRandomIntegersInRange = (min: number, max: number): number =>
+export const getRandomIntegerInRange = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min
 
-export const isValidUrl = (urlString: string, compareUrlString: string): boolean => {
+export const areUrlsSimilar = (urlString: string, compareUrlString: string): boolean => {
   try {
     const url = new URL(urlString)
     const compareToUrl = new URL(compareUrlString)
