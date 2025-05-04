@@ -1,13 +1,11 @@
 import { appConfig } from '@/appConfig'
-import { planetDestinationService } from '@/services/planetDestinationService'
+import { createPaginatedApiUrlString } from '@/services/planetDestinationService'
 import type { PlanetDestinationExtended, TripPlanItem } from '@/types'
 import { useLocalStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { computed } from 'vue'
 
 export const usePlanetHopperStore = defineStore('planetHopperStore', () => {
-  const { createPaginatedApiUrlString } = planetDestinationService()
-
   const totalPlanetDestinations = useLocalStorage<PlanetDestinationExtended[]>(
     appConfig.STORE_KEY_PLANET_DESTINATIONS,
     [],

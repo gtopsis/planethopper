@@ -4,15 +4,16 @@ import BaseSpinner from '@/components/BaseSpinner.vue'
 import ErrorAlert from '@/components/ErrorAlert.vue'
 import IconDownload from '@/components/icons/IconDownload.vue'
 import PlanetDestinationList from '@/components/PlanetDestinationList.vue'
-import { planetDestinationService } from '@/services/planetDestinationService'
+import {
+  createPaginatedApiUrlString,
+  populatePlanetDestinations,
+} from '@/services/planetDestinationService'
 import { usePlanetHopperStore } from '@/stores/planetHopperStore'
 import type { PlanetDestinationAPIResponse, PlanetDestinationExtended } from '@/types'
 import { areUrlsSimilar } from '@/utils/shared'
 import { useFetch, type AfterFetchContext } from '@vueuse/core'
 import { computed, onMounted, watch } from 'vue'
 
-const { createPaginatedApiUrlString: createPaginatedApiUrl, populatePlanetDestinations } =
-  planetDestinationService()
 const planetDestinationStore = usePlanetHopperStore()
 
 const nextPageUrl = computed(() => planetDestinationStore.planetDestinationApiNextPageUrl)
@@ -51,7 +52,7 @@ const fetchMorePlanetDestinations = () => {
   if (
     nextPageUrl.value &&
     typeof nextPageUrl.value === 'string' &&
-    areUrlsSimilar(nextPageUrl.value, createPaginatedApiUrl())
+    areUrlsSimilar(nextPageUrl.value, createPaginatedApiUrlString())
   ) {
     execute()
   }

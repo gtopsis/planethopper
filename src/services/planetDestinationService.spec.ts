@@ -1,15 +1,14 @@
 import { appConfig } from '@/appConfig'
 import {
+  createPaginatedApiUrlString,
   destinationImagesNames,
-  planetDestinationService,
+  populatePlanetDestinations,
 } from '@/services/planetDestinationService'
 import type { PlanetDestinationData } from '@/types'
 import { createPlanetDestinationData } from '@/utils/test'
 import { describe, expect, it } from 'vitest'
 
 describe('planetDestinationService', () => {
-  const { createPaginatedApiUrlString, populatePlanetDestinations } = planetDestinationService()
-
   it('should create a paginated api url string without arguments', () => {
     const url = createPaginatedApiUrlString()
 
