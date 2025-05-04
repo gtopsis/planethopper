@@ -5,13 +5,13 @@ import { getRandomIntegerInRange } from '@/utils/shared'
 export const destinationImagesNames = ['Skiathos', 'Gavdos', 'Naxos', 'Ios'] as const
 const planetImageApiUrl = new URL(appConfig.TRIP_DESTINATION_IMAGE_API_URL)
 
-const generateIdFromUrl = (url: string): string | null => {
+const getIdFromUrl = (url: string): string | null => {
   const id = url.split('/').filter(Boolean).pop()
 
   return id && id != '' ? id : null
 }
 
-const getRandomImageUrl = (): string => {
+const createRandomImageUrl = (): string => {
   const randomImage =
     destinationImagesNames[getRandomIntegerInRange(0, destinationImagesNames.length - 1)]
   const imageUrl = new URL(`${randomImage}.jpg`, planetImageApiUrl)
@@ -34,8 +34,8 @@ export const populatePlanetDestinations = (
 ): PlanetDestinationExtended[] => {
   return planetDestinations.map((pd) => ({
     ...pd,
-    id: generateIdFromUrl(pd.url) || pd.name,
-    imageUrl: getRandomImageUrl(),
+    id: getIdFromUrl(pd.url) || pd.name,
+    imageUrl: createRandomImageUrl(),
     isSelected: false,
   }))
 }
