@@ -1,4 +1,8 @@
-import { createPlanetDestinationExtended } from '@/utils/test'
+import {
+  createPlanetDestinationExtended,
+  generateElementTestSelector,
+  getElement,
+} from '@/utils/test'
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import PlanetDestinationList, {
@@ -16,6 +20,8 @@ const createPlanetDestinationListProps = (
 }
 
 describe('PlanetDestinationList', () => {
+  const selectorPrefix = 'planet-destination-'
+
   it('renders empty state when no planet destinations are provided', () => {
     const wrapper = shallowMount(PlanetDestinationList, {
       props: createPlanetDestinationListProps({
@@ -23,7 +29,7 @@ describe('PlanetDestinationList', () => {
       }),
     })
 
-    expect(wrapper.find('[data-testid="planet-destination-list-empty"]').exists()).toBe(true)
+    expect(getElement(wrapper, `${selectorPrefix}list-empty`).exists()).toBe(true)
   })
 
   it('renders correct number of planet destination items', () => {
@@ -54,7 +60,7 @@ describe('PlanetDestinationList', () => {
     })
 
     const planetDestinationItemStub = wrapper.findComponent<typeof PlanetDestinationListItem>(
-      '[data-testid="planet-destination-item-1"]',
+      generateElementTestSelector(`${selectorPrefix}item-1`),
     )
     expect(planetDestinationItemStub.props('planetDestination')).toMatchObject({
       id: planet.id,
@@ -74,7 +80,9 @@ describe('PlanetDestinationList', () => {
       }),
     })
 
-    await wrapper.findComponent('[data-testid="planet-destination-item-1"]').trigger('select')
+    await wrapper
+      .findComponent(generateElementTestSelector(`${selectorPrefix}item-1`))
+      .trigger('select')
 
     expect(wrapper.emitted('selectPlanetDestination')).toBeTruthy()
     expect(wrapper.emitted('selectPlanetDestination')?.[0]).toEqual([planet.id])

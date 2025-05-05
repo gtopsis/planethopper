@@ -1,4 +1,10 @@
-import { createPlanetDestinationExtended } from '@/utils/test'
+import {
+  createPlanetDestinationExtended,
+  getElement,
+  getElementAttribute,
+  getElementClass,
+  getElementContent,
+} from '@/utils/test'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import PlanetDestinationListItem, {
@@ -15,27 +21,20 @@ const createPlanetDestinationListItemProps = (
   }
 }
 
-const generateElementTestSelector = (id: number, attribute?: string): string => {
-  const testIdPrefix = `planet-destination-${id}`
-  if (!attribute) {
-    return `[data-testid="${testIdPrefix}"]`
-  }
-
-  return `[data-testid="${testIdPrefix}-${attribute}"]`
-}
-
 describe('PlanetDestinationListItem', () => {
+  const selectorPrefix = 'planet-destination-'
+
   it('renders planet destination details correctly', () => {
     const wrapper = mount(PlanetDestinationListItem, {
       props: createPlanetDestinationListItemProps(),
     })
 
-    const imageElement = wrapper.find(generateElementTestSelector(1, 'image'))
+    const imageElement = getElement(wrapper, `${selectorPrefix}1-image`)
     expect(imageElement.attributes('src')).toBe('/tatooine.jpg')
     expect(imageElement.attributes('alt')).toBe('Image of planet Tatooine')
-    expect(wrapper.find(generateElementTestSelector(1, 'name')).text()).toBe('Tatooine')
-    expect(wrapper.find(generateElementTestSelector(1, 'terrain')).text()).toBe('Desert')
-    expect(wrapper.find(generateElementTestSelector(1, 'population')).text()).toBe('200,000')
+    expect(getElementContent(wrapper, `${selectorPrefix}1-name`)).toBe('Tatooine')
+    expect(getElementContent(wrapper, `${selectorPrefix}1-terrain`)).toBe('Desert')
+    expect(getElementContent(wrapper, `${selectorPrefix}1-population`)).toBe('200,000')
   })
 
   it(`displays a hyphen instead of "unknown" when planet terrain value is equals to 'unknown'`, () => {
@@ -45,7 +44,7 @@ describe('PlanetDestinationListItem', () => {
       }),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1, 'terrain')).text()).toBe('-')
+    expect(getElementContent(wrapper, `${selectorPrefix}1-terrain`)).toBe('-')
   })
 
   it(`displays a hyphen instead of "unknown" when planet population value is equals to 'unknown'`, () => {
@@ -55,7 +54,7 @@ describe('PlanetDestinationListItem', () => {
       }),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1, 'population')).text()).toBe('-')
+    expect(getElementContent(wrapper, `${selectorPrefix}1-population`)).toBe('-')
   })
 
   it('applies correct classes when not selected', () => {
@@ -63,7 +62,7 @@ describe('PlanetDestinationListItem', () => {
       props: createPlanetDestinationListItemProps(),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1)).classes()).toEqual(
+    expect(getElementClass(wrapper, `${selectorPrefix}1`)).toEqual(
       expect.arrayContaining(['border-surface', 'shadow-md', 'hover:cursor-pointer']),
     )
   })
@@ -73,7 +72,7 @@ describe('PlanetDestinationListItem', () => {
       props: createPlanetDestinationListItemProps({ isSelected: true }),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1)).classes()).toEqual(
+    expect(getElementClass(wrapper, `${selectorPrefix}1`)).toEqual(
       expect.arrayContaining(['border-accent', 'shadow-lg', 'hover:cursor-auto']),
     )
   })
@@ -83,7 +82,7 @@ describe('PlanetDestinationListItem', () => {
       props: createPlanetDestinationListItemProps(),
     })
 
-    await wrapper.find(generateElementTestSelector(1)).trigger('click')
+    await getElement(wrapper, `${selectorPrefix}1`).trigger('click')
 
     expect(wrapper.emitted('select')).toBeTruthy()
     expect(wrapper.emitted('select')).toHaveLength(1)
@@ -94,7 +93,7 @@ describe('PlanetDestinationListItem', () => {
       props: createPlanetDestinationListItemProps({ isSelected: true }),
     })
 
-    await wrapper.find(generateElementTestSelector(1)).trigger('click')
+    await getElement(wrapper, `${selectorPrefix}1`).trigger('click')
 
     expect(wrapper.emitted('select')).toBeFalsy()
   })
@@ -104,7 +103,7 @@ describe('PlanetDestinationListItem', () => {
       props: createPlanetDestinationListItemProps(),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1)).attributes('title')).toBe(
+    expect(getElementAttribute(wrapper, `${selectorPrefix}1`, 'title')).toBe(
       'Add destination to travel plan',
     )
   })
@@ -114,7 +113,7 @@ describe('PlanetDestinationListItem', () => {
       props: createPlanetDestinationListItemProps({ isSelected: true }),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1)).attributes('title')).toBe('')
+    expect(getElementAttribute(wrapper, `${selectorPrefix}1`, 'title')).toBe('')
   })
 
   it('formats population number correctly', () => {
@@ -124,6 +123,6 @@ describe('PlanetDestinationListItem', () => {
       }),
     })
 
-    expect(wrapper.find(generateElementTestSelector(1, 'population')).text()).toBe('1,000,000')
+    expect(getElementContent(wrapper, `${selectorPrefix}1-population`)).toBe('1,000,000')
   })
 })
